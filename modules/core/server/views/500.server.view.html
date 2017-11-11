@@ -1,8 +1,15 @@
-{% extends 'layout.server.view.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<% include header.server.view.html %>
 
-{% block content %}
-<h1>Server Error</h1>
-<pre>
-  {{error}}
-</pre>
-{% endblock %}
+<body class="ng-cloak">
+<header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+<section class="content">
+  <section class="container">
+    <h1>Server Error</h1>
+    <pre><%-error%></pre>
+  </section>
+</section>
+<% include scripts.server.view.html %>
+</body>
+</html>

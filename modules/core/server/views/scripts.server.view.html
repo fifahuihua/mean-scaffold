@@ -1,0 +1,12 @@
+<!--Embedding The User Object-->
+<script type="text/javascript">
+  var user = <%- JSON.stringify(user || {}) %>;
+</script>
+
+<!--Load The Socket.io File-->
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<!--Application JavaScript Files-->
+<% for(var i=0; i<jsFiles.length; i++) { %>
+<script type="text/javascript" src="<%-jsFiles[i]%>"></script>
+<% } %>
