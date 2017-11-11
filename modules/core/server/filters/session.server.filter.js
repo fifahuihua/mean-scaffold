@@ -9,8 +9,9 @@ var _ = require('lodash');
 
 var URLS_NOT_REQUIRE_LOGIN = [
   '/',
+  '/api/auth/*',
   '/user/signin',
-  '/user/signup',
+  '/api/auth/signup',
   '/user/logout'
 ];
 
@@ -47,7 +48,7 @@ module.exports = function (req, res, next) {
           res.redirect(INVALID_LOGIN_URL);
         }
       } else {
-        if(_.startsWith(currentPath, '/api')
+        if (_.startsWith(currentPath, '/api')
           || _.startsWith(currentPath, '/client_modules')
           || _.startsWith(currentPath, '/core')
           || _.startsWith(currentPath, '/favicon.ico')
@@ -67,11 +68,11 @@ var checkPermission = function (req, permission) {
     return false;
   }
 
-  if (permission.permissionType == 'FREE') {
-    return req.user.userType == 'PAID' || req.user.userType == 'FREE';
+  if (permission.permissionType === 'FREE') {
+    return req.user.userType === 'PAID' || req.user.userType === 'FREE';
   }
 
-  if (permission.permissionType == 'PAID') {
+  if (permission.permissionType === 'PAID') {
     // return Util.hasPermission(req.user.paidProducts, permission.authCode);
     return true;
   }
@@ -83,13 +84,13 @@ var getPermission = function (currentPath) {
   if (URL_PERMISSION_MAPPING[currentPath]) {
     return URL_PERMISSION_MAPPING[currentPath];
   }
-  for (var url in URL_PERMISSION_MAPPING) {
+  Object.keys(URL_PERMISSION_MAPPING).forEach(function (url) {
     var pathRegex = "^" + url.replace(/\*/g, '(.*)') + '$';
     var pattern = new RegExp(pathRegex, "i");
     if (pattern.test(currentPath)) {
       return URL_PERMISSION_MAPPING[url];
     }
-  }
+  });
 
   return null;
 };
@@ -106,8 +107,3 @@ var isUrlNotRequireLogin = function (currentPath) {
   return false;
 };
 
-if (typeof String.prototype.endsWith !== 'function') {
-  String.prototype.endsWith = function (suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
-  };
-}

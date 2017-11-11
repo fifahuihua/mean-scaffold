@@ -3,39 +3,32 @@
     <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="First Name" required>
-          <div ng-messages="vm.userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+          <label for="realName">真实姓名</label>
+          <input type="text" id="realName" name="realName" class="form-control" ng-model="vm.user.realName" placeholder="请输入您的真实姓名" required>
+          <div ng-messages="vm.userForm.realName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">真实姓名是必填项。</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Last Name" required>
-          <div ng-messages="vm.userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" lowercase required>
+          <label for="email">邮箱地址</label>
+          <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="请输入您的邮箱地址" lowercase required>
           <div ng-messages="vm.userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+            <p class="help-block error-text" ng-message="required">邮箱地址为必填项。</p>
+            <p class="help-block error-text" ng-message="email">邮箱地址不合法。</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="Username" lowercase required>
+          <label for="username">用户账号</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="请输入用户账号" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="required">用户登录账号为必填项。</p>
           </div>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
+          <button type="submit" class="btn btn-primary">保存用户信息</button>
         </div>
         <div ng-show="vm.success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
+          <strong>用户信息被成功保存！</strong>
         </div>
         <div ng-show="vm.error" class="text-center text-danger">
           <strong ng-bind="vm.error"></strong>

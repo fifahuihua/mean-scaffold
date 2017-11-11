@@ -38,7 +38,7 @@ var clearSessionId = function(res) {
 };
 
 var resetSessionIdExpiredTime = function(req, res, meanScaffoldId) {
-  if (!Config.sessionCookie.maxAge && meanScaffoldId && meanScaffoldId != '') {
+  if (!Config.sessionCookie.maxAge && meanScaffoldId && meanScaffoldId !== '') {
     res.cookie(SESSION_ID_COOKIE_KEY, meanScaffoldId, { maxAge: SESSION_ID_EXPIRATION_AGE });
   }
 };
@@ -50,7 +50,7 @@ var checkAndRefreshSession = function (req, res) {
   }
 
   if (req.user) {
-    if (!req.user.sessionId || req.user.sessionId != getSessionId(req)) {
+    if (!req.user.sessionId || req.user.sessionId !== getSessionId(req)) {
       clearSessionId(res);
       req.logout();
     } else {

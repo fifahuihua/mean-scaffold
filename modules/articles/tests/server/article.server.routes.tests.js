@@ -39,8 +39,7 @@ describe('Article CRUD tests', function () {
 
     // Create a new user
     user = new User({
-      firstName: 'Full',
-      lastName: 'Name',
+      realName: 'Full Name',
       displayName: 'Full Name',
       email: 'test@test.com',
       username: credentials.username,
@@ -326,8 +325,7 @@ describe('Article CRUD tests', function () {
 
     // Create orphan user
     var _orphan = new User({
-      firstName: 'Full',
-      lastName: 'Name',
+      realName: 'Full Name',
       displayName: 'Full Name',
       email: 'orphan@test.com',
       username: _creds.username,
@@ -484,8 +482,7 @@ describe('Article CRUD tests', function () {
 
     // Create temporary user
     var _user = new User({
-      firstName: 'Full',
-      lastName: 'Name',
+      realName: 'Full Name',
       displayName: 'Full Name',
       email: 'temp@test.com',
       username: _creds.username,

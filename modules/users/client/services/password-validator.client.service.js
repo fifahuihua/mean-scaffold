@@ -24,7 +24,7 @@
     }
 
     function getPopoverMsg() {
-      var popoverMsg = 'Please enter a passphrase or password with 10 or more characters, numbers, lowercase, uppercase, and special characters.';
+      var popoverMsg = '密码应该由10个或10个以上字符组成，且应该包含大小写字母数字以及特殊字符。';
 
       return popoverMsg;
     }

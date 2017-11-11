@@ -39,8 +39,7 @@ describe('User CRUD tests', function () {
 
     // Create a new user
     _user = {
-      firstName: 'Full',
-      lastName: 'Name',
+      realName: 'Full Name',
       displayName: 'Full Name',
       email: 'test@test.com',
       username: credentials.username,
@@ -218,8 +217,7 @@ describe('User CRUD tests', function () {
           // Get single user information from the database
 
           var userUpdate = {
-            firstName: 'admin_update_first',
-            lastName: 'admin_update_last',
+            realName: 'admin_update_first',
             roles: ['admin']
           };
 
@@ -232,8 +230,7 @@ describe('User CRUD tests', function () {
               }
 
               userInfoRes.body.should.be.instanceof(Object);
-              userInfoRes.body.firstName.should.be.equal('admin_update_first');
-              userInfoRes.body.lastName.should.be.equal('admin_update_last');
+              userInfoRes.body.realName.should.be.equal('admin_update_first');
               userInfoRes.body.roles.should.be.instanceof(Array).and.have.lengthOf(1);
               userInfoRes.body._id.should.be.equal(String(user._id));
 
@@ -635,8 +632,7 @@ describe('User CRUD tests', function () {
           }
 
           var userUpdate = {
-            firstName: 'user_update_first',
-            lastName: 'user_update_last'
+              realName: 'user_update_first'
           };
 
           agent.put('/api/users')
@@ -648,8 +644,7 @@ describe('User CRUD tests', function () {
               }
 
               userInfoRes.body.should.be.instanceof(Object);
-              userInfoRes.body.firstName.should.be.equal('user_update_first');
-              userInfoRes.body.lastName.should.be.equal('user_update_last');
+              userInfoRes.body.realName.should.be.equal('user_update_first');
               userInfoRes.body.roles.should.be.instanceof(Array).and.have.lengthOf(1);
               userInfoRes.body.roles.indexOf('user').should.equal(0);
               userInfoRes.body._id.should.be.equal(String(user._id));
@@ -676,8 +671,7 @@ describe('User CRUD tests', function () {
           }
 
           var userUpdate = {
-            firstName: 'user_update_first',
-            lastName: 'user_update_last',
+            realName: 'user_update_first'
             roles: ['user', 'admin']
           };
 
@@ -690,8 +684,7 @@ describe('User CRUD tests', function () {
               }
 
               userInfoRes.body.should.be.instanceof(Object);
-              userInfoRes.body.firstName.should.be.equal('user_update_first');
-              userInfoRes.body.lastName.should.be.equal('user_update_last');
+              userInfoRes.body.realName.should.be.equal('user_update_first');
               userInfoRes.body.roles.should.be.instanceof(Array).and.have.lengthOf(1);
               userInfoRes.body.roles.indexOf('user').should.equal(0);
               userInfoRes.body._id.should.be.equal(String(user._id));
@@ -733,8 +726,7 @@ describe('User CRUD tests', function () {
           }
 
           var userUpdate = {
-            firstName: 'user_update_first',
-            lastName: 'user_update_last',
+            realName: 'user_update_first',
             username: user.username
           };
 
@@ -785,8 +777,7 @@ describe('User CRUD tests', function () {
           }
 
           var userUpdate = {
-            firstName: 'user_update_first',
-            lastName: 'user_update_last',
+            realName: 'user_update_first',
             email: user.email
           };
 
@@ -815,8 +806,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
 
       var userUpdate = {
-        firstName: 'user_update_first',
-        lastName: 'user_update_last'
+        realName: 'user_update_first'
       };
 
       agent.put('/api/users')

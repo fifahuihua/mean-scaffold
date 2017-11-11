@@ -11,7 +11,10 @@
 
   function Authentication($window) {
     var auth = {
-      user: $window.user
+      user: $window.user,
+      isLogin: function () {
+        return $window.user && $window.user.username;
+      }
     };
 
     return auth;
