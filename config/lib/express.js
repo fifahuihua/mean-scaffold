@@ -137,6 +137,15 @@ module.exports.initModulesConfiguration = function (app, db) {
 };
 
 /**
+ * Configure the filters
+ */
+module.exports.initFilters = function (app) {
+  config.files.server.filters.forEach(function (filterPath) {
+    app.use(require(path.resolve(filterPath)));
+  });
+};
+
+/**
  * Configure Helmet headers configuration
  */
 module.exports.initHelmetHeaders = function (app) {
@@ -243,6 +252,9 @@ module.exports.init = function (db) {
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);
+
+  // Initialize server filters
+  this.initFilters(app);
 
   // Initialize modules server authorization policies
   this.initModulesServerPolicies(app);
