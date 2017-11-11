@@ -671,7 +671,7 @@ describe('User CRUD tests', function () {
           }
 
           var userUpdate = {
-            realName: 'user_update_first'
+            realName: 'user_update_first',
             roles: ['user', 'admin']
           };
 

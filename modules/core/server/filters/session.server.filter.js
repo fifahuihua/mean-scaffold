@@ -9,9 +9,8 @@ var _ = require('lodash');
 
 var URLS_NOT_REQUIRE_LOGIN = [
   '/',
-  '/api/auth/*',
+  '/api/*',
   '/user/signin',
-  '/api/auth/signup',
   '/user/logout'
 ];
 
