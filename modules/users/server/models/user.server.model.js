@@ -32,7 +32,7 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+    validate: [validateLocalStrategyProperty, 'Please fill in your real name']
   },
   displayName: {
     type: String,
@@ -72,12 +72,14 @@ var UserSchema = new Schema({
   additionalProvidersData: {},
   roles: {
     type: [{
-      type: String,
-      enum: ['user', 'admin']
+      type: String
     }],
     default: ['user'],
     required: 'Please provide at least one role'
   },
+  permissionCodes: [{
+    type: String
+  }],
   updated: {
     type: Date
   },
@@ -126,7 +128,7 @@ UserSchema.pre('validate', function (next) {
  */
 UserSchema.methods.hashPassword = function (password) {
   if (this.salt && password) {
-    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
+    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64, 'sha1').toString('base64');
   } else {
     return password;
   }
