@@ -85,7 +85,7 @@ $ gulp prod
 ```
 
 ### Testing Your Application with Gulp
-Using the full test suite included with MEAN.JS with the test task:
+Using the full test suite included in mean-scaffold with the test task:
 
 ### Run all tests
 ```bash
@@ -130,7 +130,7 @@ $
 $ docker run -p 3000:3000 -p 35729:35729 -v /Users/mdl/workspace/mean-stack/mean/public:/home/mean/public -v /Users/mdl/workspace/mean-stack/mean/app:/home/mean/app --link db:db_1 mean
 ```
 
-s## License
+## License
 (The MIT License)
 
 Permission is hereby granted, free of charge, to any person obtaining

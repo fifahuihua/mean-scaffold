@@ -55,7 +55,6 @@ module.exports = {
     sockets: 'modules/*/server/sockets/**/*.js',
     config: ['modules/*/server/config/*.js'],
     filters: ['modules/*/server/filters/*.js'],
-    policies: 'modules/*/server/policies/*.js',
     views: ['modules/*/server/views/*.html']
   }
 };

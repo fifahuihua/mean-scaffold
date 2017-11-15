@@ -9,22 +9,20 @@ var _ = require('lodash');
 
 var URLS_NOT_REQUIRE_LOGIN = [
   '/',
-  '/api/*',
   '/user/signin',
   '/user/logout'
 ];
 
 var RESPONSE_TYPE_JSON = "JSON";
 var RESPONSE_JSON_CONTENT = { message: 'unauthorized' };
-var RESPONSE_TYPE_REDIRECT_INVALID_LOGIN_PAGE = 'REDIRECT_INVALID_LOGIN_PAGE';
 var INVALID_LOGIN_URL = '/#!/forbidden';
 var UNKNOWN_URL = '/#!/not-found';
 
-// the mapping like as : url -> { authCode: 'XXXX', responseType: 'JSON'}
 var URL_PERMISSION_MAPPING = {
-  '/api/admin/changepassword': { permissionType: 'FREE', authCode: 'USER_ADMIN', responseType: RESPONSE_TYPE_JSON },
-  '/api/admin/users/update': { permissionType: 'FREE', authCode: 'USER_ADMIN', responseType: RESPONSE_TYPE_JSON },
-  '/api/admin/users/profile': { permissionType: 'FREE', authCode: 'USER_ADMIN', responseType: RESPONSE_TYPE_JSON }
+  '/api/articles': { permissionType: 'FREE'},
+  '/api/users': { permissionType: 'FREE'},
+  '/api/users/*': { permissionType: 'FREE'},
+  '/api/auth/test': { permissionType: 'AUTH', authCode: 'TEST_AUTH'}
 };
 
 module.exports = function (req, res, next) {
@@ -38,25 +36,11 @@ module.exports = function (req, res, next) {
     } else {
       Util.checkAndRefreshSession(req, res);
       var permission = getPermission(currentPath);
-      if (permission) {
-        if (checkPermission(req, permission)) {
-          next();
-        } else if (permission.responseType === RESPONSE_TYPE_JSON) {
-          res.status(403).send(RESPONSE_JSON_CONTENT);
-        } else {
-          res.redirect(INVALID_LOGIN_URL);
-        }
+      if (permission && checkPermission(req, permission)) {
+        next();
       } else {
-        if (_.startsWith(currentPath, '/api')
-          || _.startsWith(currentPath, '/client_modules')
-          || _.startsWith(currentPath, '/core')
-          || _.startsWith(currentPath, '/favicon.ico')
-          || _.startsWith(currentPath, '/#!')
-        ) {
-          res.redirect(UNKNOWN_URL);
-        } else {
-          res.redirect('/#!' + currentPath);
-        }
+        console.log("currentPath: " + currentPath);
+        return req.method === 'GET' ? res.redirect(UNKNOWN_URL) : res.status(403).send(RESPONSE_JSON_CONTENT);
       }
     }
   }
@@ -68,30 +52,32 @@ var checkPermission = function (req, permission) {
   }
 
   if (permission.permissionType === 'FREE') {
-    return req.user.userType === 'PAID' || req.user.userType === 'FREE';
+    return true;
   }
 
   if (permission.permissionType === 'PAID') {
-    // return Util.hasPermission(req.user.paidProducts, permission.authCode);
-    return true;
+    return Util.hasPermission(req.user.paidProducts, permission.authCode);
   }
 
   return false;
 };
 
 var getPermission = function (currentPath) {
-  if (URL_PERMISSION_MAPPING[currentPath]) {
-    return URL_PERMISSION_MAPPING[currentPath];
+  var permission = URL_PERMISSION_MAPPING[currentPath];
+
+  if (permission) {
+    return permission;
   }
+
   Object.keys(URL_PERMISSION_MAPPING).forEach(function (url) {
     var pathRegex = "^" + url.replace(/\*/g, '(.*)') + '$';
     var pattern = new RegExp(pathRegex, "i");
     if (pattern.test(currentPath)) {
-      return URL_PERMISSION_MAPPING[url];
+      permission = URL_PERMISSION_MAPPING[url];
     }
   });
 
-  return null;
+  return permission;
 };
 
 var isUrlNotRequireLogin = function (currentPath) {

@@ -177,16 +177,6 @@ module.exports.initModulesClientRoutes = function (app) {
 };
 
 /**
- * Configure the modules ACL policies
- */
-module.exports.initModulesServerPolicies = function (app) {
-  // Globbing policy files
-  config.files.server.policies.forEach(function (policyPath) {
-    require(path.resolve(policyPath)).invokeRolesPolicies();
-  });
-};
-
-/**
  * Configure the modules server routes
  */
 module.exports.initModulesServerRoutes = function (app) {
@@ -255,9 +245,6 @@ module.exports.init = function (db) {
 
   // Initialize server filters
   this.initFilters(app);
-
-  // Initialize modules server authorization policies
-  this.initModulesServerPolicies(app);
 
   // Initialize modules server routes
   this.initModulesServerRoutes(app);

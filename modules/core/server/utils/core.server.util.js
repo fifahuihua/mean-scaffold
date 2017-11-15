@@ -61,5 +61,10 @@ var checkAndRefreshSession = function (req, res) {
   }
 };
 
+var hasPermission = function (userPaidProducts, authCode) {
+  return true; // TODO: need to finish this function of permission checking.
+};
+
 exports.isPublicResource = isPublicResource;
+exports.hasPermission = hasPermission;
 exports.checkAndRefreshSession = checkAndRefreshSession;
