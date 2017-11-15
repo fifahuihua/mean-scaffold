@@ -14,7 +14,6 @@
     });
 
     Menus.addMenuItem('account', {
-      title: '',
       state: 'settings',
       type: 'dropdown',
       roles: ['user']
