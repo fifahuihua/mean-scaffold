@@ -4,7 +4,7 @@ angular.module('core').factory('authInterceptor', ['$q', '$injector', 'Authentic
   function ($q, $injector, Authentication) {
     return {
       responseError: function(rejection) {
-        if (!rejection.config.ignoreAuthModule) {
+        if (!rejection.config.ignoreAuthModule && rejection.config.method === 'GET') {
           switch (rejection.status) {
             case 401:
               // Deauthenticate the global user

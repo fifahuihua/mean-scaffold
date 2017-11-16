@@ -33,11 +33,11 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
       $scope.alerts.splice(index, 1);
     };
 
-    $scope.signin = function(isValid) {
+    $scope.signin = function() {
       $scope.error = null;
       $scope.isFailToLogin = false;
 
-      if (!isValid) {
+      if (!$scope.credentials.username || !$scope.credentials.password) {
         return false;
       }
 
@@ -59,6 +59,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
           });
         }, 3000);
       });
+
+      return false;
     };
   }
 ]);

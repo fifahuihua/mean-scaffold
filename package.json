@@ -1,5 +1,5 @@
 {
-  "name": "Node-Scaffold",
+  "name": "mean-scaffold",
   "description": "This is a basic node scaffold for backend application.",
   "version": "0.0.1",
   "private": false,
@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/fifahuihua/mean-scaffold.git"
   },
   "engines": {
     "node": ">=6.11.2",
